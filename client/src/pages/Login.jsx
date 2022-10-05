@@ -25,6 +25,7 @@ const Login_titles = styled.h1`
   margin-bottom: 20px;
   margin-left: 150px;
   color: #a93b74;
+  background-color:red;
 `;
 
 const LoginForm = styled.form`
