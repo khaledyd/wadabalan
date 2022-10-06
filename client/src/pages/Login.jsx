@@ -21,11 +21,11 @@ const Loginn = styled.div`
   border-radius: 5px;
 `;
 
-const Login_titles = styled.h1`
+const Logintitles = styled.h1`
   margin-bottom: 20px;
   margin-left: 150px;
   color: #a93b74;
-  background-color:red;
+
 `;
 
 const LoginForm = styled.form`
@@ -33,12 +33,12 @@ const LoginForm = styled.form`
   flex-direction: column;
 `;
 
-const Span_email = styled.span`
+const Spanemail = styled.span`
   font-size: 16px;
   color: #a93b74;
   margin-bottom: 5px;
 `;
-const Email_Input = styled.input`
+const EmailInput = styled.input`
   width: 400px;
   height: 30px;
   border: 1px solid #a93b74;
@@ -47,13 +47,13 @@ const Email_Input = styled.input`
   border-radius: 3px;
 `;
 
-const Span_PASSWORD = styled.span`
+const SpanPASSWORD = styled.span`
   font-size: 16px;
   margin-top: 10px;
   color: #a93b74;
   margin-bottom: 5px;
 `;
-const Password_Input = styled.input`
+const PasswordInput = styled.input`
   width: 400px;
   height: 30px;
   border: 1px solid #a93b74;
@@ -62,12 +62,12 @@ const Password_Input = styled.input`
   border-radius: 3px;
 `;
 
-const Login_btns = styled.div`
+const Loginbtns = styled.div`
   display: flex;
   margin-top: 20px;
 `;
 
-const Login_btn = styled.button`
+const Loginbtn = styled.button`
   padding: 10px 47px;
   font-size: 19px;
   border: none;
@@ -75,7 +75,7 @@ const Login_btn = styled.button`
   background-color: #f35588;
   color: #fff;
 `;
-const Login_Google_btn = styled.button`
+const LoginGooglebtn = styled.button`
   padding: 10px 47px;
   font-size: 19px;
   border: none;
@@ -91,7 +91,7 @@ const Signup = styled.p`
   font-size: 22px;
   font-weight: bold;
 `;
-const Forget_password = styled.p`
+const Forgetpassword = styled.p`
   color: #a93b74;
 `;
 
@@ -101,19 +101,19 @@ const Login = () => {
       <Wraper>
         <Navbar />
         <Loginn>
-          <Login_titles>Log in</Login_titles>
+          <Logintitles>Log in</Logintitles>
           <LoginForm>
-            <Span_email>Email</Span_email>
-            <Email_Input type="email" />
-            <Span_PASSWORD>Password</Span_PASSWORD>
-            <Password_Input type="password" />
-            <Login_btns>
-              <Login_btn type="submit">Sign in </Login_btn>
-              <Login_Google_btn>sign in with Google</Login_Google_btn>
-            </Login_btns>
+            <Spanemail>Email</Spanemail>
+            <EmailInput type="email" />
+            <SpanPASSWORD>Password</SpanPASSWORD>
+            <PasswordInput type="password" />
+            <Loginbtns>
+              <Loginbtn type="submit">Sign in </Loginbtn>
+              <LoginGooglebtn>sign in with Google</LoginGooglebtn>
+            </Loginbtns>
           </LoginForm>
           <Signup>Sign up</Signup>
-          <Forget_password>Forget password</Forget_password>
+          <Forgetpassword>Forget password</Forgetpassword>
         </Loginn>
       </Wraper>
     </Container>

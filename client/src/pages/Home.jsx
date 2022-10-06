@@ -9,6 +9,20 @@ import Steps from "../components/home/Steps";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+    //phones
+    @media (max-width: 480px) {
+    display: flex;
+  
+
+    align-items: center;
+    justify-content: center;
+width: 100%;
+background-color: red;
+
+
+
+  }
+
 `;
 const Header = styled.div`
   width: 100%;

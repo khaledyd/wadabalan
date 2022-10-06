@@ -1,10 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 
+
 export default function Footer() {
   const Container = styled.footer`
     display: flex;
     flex-direction: column;
+
+    @media (max-width: 480px) {
+    }
   `;
   const Footerone = styled.div`
     display: flex;
@@ -45,33 +49,33 @@ export default function Footer() {
   `;
 
   const Footertwo = styled.div`
-  display:flex;`;
-  const FooterImg = styled.img`
-  
-  width:220px;
-  height:30px;
-padding: 50px 30px;
+    display: flex;
   `;
-  
+  const FooterImg = styled.img`
+    width: 220px;
+    height: 30px;
+    padding: 50px 30px;
+  `;
+
   const FooterTwoLits = styled.ul`
-  display: flex;
-  font-family: "Roboto", sans-serif;
-  list-style: none;
-padding-left: 500px;
-padding-top: 50px;
-padding-bottom: 50px;
+    display: flex;
+    font-family: "Roboto", sans-serif;
+    list-style: none;
+    padding-left: 500px;
+    padding-top: 50px;
+    padding-bottom: 50px;
   `;
   const FooterTwolistitems = styled.li`
-  padding:5px;
+    padding: 5px;
   `;
   const Footertwotext = styled.p`
-  padding: 55px 30px;
-  font-family: "Roboto", sans-serif;
+    padding: 55px 30px;
+    font-family: "Roboto", sans-serif;
   `;
   return (
     <Container>
       <Footerone>
-      <FooterImg src="/images/lg.png" />
+        <FooterImg src="/images/lg.png" />
         <Animlot>
           Wadabalan
           <AnimlotItems>About</AnimlotItems>
@@ -88,18 +92,15 @@ padding-bottom: 50px;
           Use cases
           <Usecasesitems>small bussiness</Usecasesitems>
           <Usecasesitems>Creators</Usecasesitems>
-      
         </Usecases>
       </Footerone>
       <Footertwo>
-       
         <FooterTwoLits>
-            <FooterTwolistitems>terms |</FooterTwolistitems>
-            <FooterTwolistitems>privaciy |</FooterTwolistitems>
-            <FooterTwolistitems>Copywrite </FooterTwolistitems>
+          <FooterTwolistitems>terms |</FooterTwolistitems>
+          <FooterTwolistitems>privaciy |</FooterTwolistitems>
+          <FooterTwolistitems>Copywrite </FooterTwolistitems>
         </FooterTwoLits>
         <Footertwotext>© 2022 Wadabalan All Rights Reserved</Footertwotext>
-   
       </Footertwo>
     </Container>
   );
