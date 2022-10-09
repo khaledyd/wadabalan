@@ -6,160 +6,349 @@ import { devices } from "../../uti/devices";
 import { useState } from "react";
 
 const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
-
   width: 100%;
   height: 500px;
-
-  background-image: url("https://images.pexels.com/photos/3038740/pexels-photo-3038740.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
-  background-repeat: no-repeat;
-  background-size: 1500px, 500px;
+  background-image: url("https://images.pexels.com/photos/1540343/pexels-photo-1540343.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+  justify-content: flex-end;
+  background-repeat: no-repeat, repeat;
+  flex-direction: column;
 
   //phones
   @media (max-width: 480px) {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 1463px;
+    width: 400vw;
+    height: 800px;
 
-    background-image: url("https://images.pexels.com/photos/3038740/pexels-photo-3038740.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
-    background-repeat: no-repeat;
-    background-size: 1462px, 500px;
+    justify-content: flex-end;
+    flex-direction: column;
+  }
+
+  //tablest
+  @media (min-width: 481px) and (max-width: 768px) {
+    width: 400vw;
+    height: 1000px;
+
+    justify-content: flex-end;
+    flex-direction: column;
+  }
+  //latptops
+  @media (min-width: 769px) and (max-width: 1024px) {
+    width: 400vw;
+    height: 1000px;
+
+    justify-content: flex-end;
+    flex-direction: column;
   }
 `;
 
 const Navup = styled.div`
   display: flex;
+  margin-right: 50px;
+
   //phones
   @media (max-width: 480px) {
     display: flex;
-    width: 300px;
-    height: 30px;
-    background-color: red;
-    margin-top: -400px;
- margin-left: 500px;
+    margin-right: 50px;
+    justify-content: baseline;
+  }
+  //tablest
+  @media (min-width: 481px) and (max-width: 768) {
+    display: flex;
+    margin-right: 50px;
+    justify-content: baseline;
+  }
+  //latptops
+  @media (min-width: 769px) and (max-width: 1024px) {
+    display: flex;
+    margin-right: 50px;
+    justify-content: baseline;
   }
 `;
 
 const NavupList = styled.div`
   display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 100px;
+  margin-top: 30px;
+
   //phones
   @media (max-width: 480px) {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-left: 700px;
+    justify-content: space-between;
+
+    width: 100%;
+    height: 100px;
+    margin-top: 30px;
+  }
+  //tablests
+  @media (min-width: 481px) and (max-width: 768px) {
+    display: flex;
+    justify-content: space-between;
+
+    width: 100%;
+    height: 100px;
+    margin-top: 30px;
+  }
+  //latptops
+  @media (min-width: 769px) and (max-width: 1024px) {
+    display: flex;
+    justify-content: space-between;
+
+    width: 100%;
+    height: 100px;
+    margin-top: 30px;
   }
 `;
+const Logo = styled.div``;
 
 const Img = styled.img`
-  margin-bottom: 400px;
-  margin-left: 20px;
-  margin-top: 20px;
+  width: max-content;
+  height: max-content;
+  padding-left: 30px;
+
   //phones
   @media (max-width: 480px) {
-    width: 290px;
+    margin-left: 20px;
+    width: 270px;
     height: 60px;
-    margin-left: 10px;
+  }
+  //phones
+  @media (min-width: 481px) and (max-width: 768px) {
+    margin-left: 20px;
+    width: 640px;
+    height: 120px;
+  }
+  //latptops
+  @media (min-width: 769px) and (max-width: 1024px) {
+    width: 700px;
+    height: 140px;
+    padding-left: 30px;
+  }
+`;
+const Navlistabtn = styled.div`
+  display: flex;
+  @media (max-width: 480px) {
+    display: flex;
+    flex-direction: column;
+  }
+  //tablets
+  @media (min-width: 481px) and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+  }
+  //latptops
+  @media (min-width: 769px) and (max-width: 1024px) {
+    display: flex;
   }
 `;
 
 const Navlist = styled.ul`
   display: flex;
-  align-items: center;
-  margin-left: 400px;
-  font-size: 20px;
-  list-style: none;
+
   font-family: "Oxygen Mono", monospace;
-  margin-bottom: 400px;
+
   color: #fff;
+  list-style: none;
 
   //phones
   @media (max-width: 480px) {
     display: flex;
     flex-direction: column;
-    margin-bottom: 10px;
-    align-items: baseline;
- margin-left: -200px;
+    font-size: 30px;
+    list-style: none;
+  }
+  //tablets
+  @media (min-width: 481px) and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    font-size: 60px;
+    list-style: none;
+  }
+  //latptops
+  @media (min-width: 769px) and (max-width: 1024px) {
+    display: flex;
 
+    font-size: 60px;
+    list-style: none;
   }
 `;
 const NavlistItem = styled.li`
   padding: 5px 20px;
+  width: max-content;
+  padding: 5px 10px;
+  height: max-content;
+  cursor: pointer;
+  :hover {
+    background-color: #f675a8;
+    transition: 500ms;
+  }
+  //latptops
+  @media (min-width: 769px) and (max-width: 1024px) {
+    padding: 20px 50px;
+  }
 `;
 const Navbtn = styled.button`
-  padding: 10px 40px;
   font-family: "Oxygen Mono", monospace;
-  border: none;
-  border-radius: 3px;
-  color: #554994;
-  background-color: #fff;
-  margin-bottom: 400px;
-  margin-top: 10px;
+  width: max-content;
+  height: max-content;
+  padding: 10px 30px;
+  font-size: 16px;
+  :hover {
+    background-color: #f675a8;
+    transition: 500ms;
+    font-size: 20px;
+    color: #fff;
+    border: none;
+    margin-left: 20px;
+  }
+
   //phones
   @media (max-width: 480px) {
+  }
+  //tablets
+  @media (min-width: 481px) and (max-width: 768px) {
+    padding: 20px 60px;
+    font-size: 30px;
+  }
+  //latptops
+  @media (min-width: 769px) and (max-width: 1024px) {
+    padding: 30px 60px;
+    font-size: 30px;
   }
 `;
 const Navdown = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
   flex-direction: column;
-  margin-top: -300px;
+  padding-bottom: 100px;
+
   //phones
   @media (max-width: 480px) {
-    margin-top: -100px;
-    margin-left: 550px;
-    display: flex;
+    margin-top: 200px;
+    margin-left: 30px;
+    color: #fff;
+  }
+  //tablets
+  @media (min-width: 481px) and (max-width: 768px) {
+    margin-top: 450px;
+    margin-left: 30px;
+    color: #fff;
+  }
+  //latptops
+  @media (min-width: 769px) and (max-width: 1024px) {
+    margin-top: 250px;
+    margin-left: 30px;
+    color: #fff;
   }
 `;
 const NavdownTitle = styled.h1`
-  font-size: 40px;
   font-family: "Inter", sans-serif;
+  font-size: 60px;
   color: #fff;
-  padding-bottom: 10px;
+
+  //phones
+  @media (max-width: 480px) {
+    font-size: 70px;
+    color: #fff;
+    text-align: center;
+  }
+  //tablets
+  @media (min-width: 481px) and (max-width: 768px) {
+    font-size: 90px;
+    color: #fff;
+    text-align: center;
+  }
+  //latptops
+  @media (min-width: 769px) and (max-width: 1024px) {
+    font-size: 90px;
+    color: #fff;
+    text-align: center;
+  }
 `;
 const Navdownsubtitle = styled.p`
-  font-size: 20px;
   font-family: "Inter", sans-serif;
+  font-size: 30px;
   color: #fff;
-  padding-bottom: 10px;
-  margin-left: 120px;
+
+  //phones
+  @media (max-width: 480px) {
+    font-size: 30px;
+    color: #fff;
+  }
+  //tablets
+  @media (min-width: 481px) and (max-width: 768px) {
+    font-size: 60px;
+    color: #fff;
+  }
+  //latptops
+  @media (min-width: 769px) and (max-width: 1024px) {
+    font-size: 60px;
+    color: #fff;
+  }
 `;
 const Navsearcharea = styled.div`
   display: flex;
+  margin-top: 10px;
 `;
 const Navdowninput = styled.input`
-  width: 700px;
+  width: 500px;
   height: 50px;
-  margin-left: -80px;
   border: none;
-  background-color: #fff;
   outline: none;
+  font-size: 30px;
   padding-left: 20px;
-  font-size: 20px;
+  //phones
+  @media (max-width: 480px) {
+    width: 500px;
+    height: 70px;
+    border: none;
+    outline: none;
+    font-size: 30px;
+    padding-left: 20px;
+  }
+  //tablets
+  @media (min-width: 481px) and (max-width: 768px) {
+    width: 900px;
+    height: 100px;
+    border: none;
+    outline: none;
+    font-size: 40px;
+    padding-left: 40px;
+  }
+    //latptops
+    @media (min-width: 769px) and (max-width: 1024px) {
+      width: 900px;
+    height: 100px;
+    border: none;
+    outline: none;
+    font-size: 40px;
+    padding-left: 40px;
+  }
 `;
 
 const Navdownbutton = styled.button`
-  height: 55x;
-  width: 80px;
-  margin-left: -5px;
+  width: 100px;
   border: none;
-  background-color: #554995;
+  cursor: pointer;
+  background-color: #f675a8;
+  color: #fff;
 `;
 
 const Toggle = styled.div`
   display: none;
   //phones
   @media (max-width: 480px) {
-    color: #fff;
-
     display: flex;
-    margin-left: 100px;
-    margin-top: 20px;
   }
+  //tablets
+  @media (min-width: 481px) and (max-width: 768px) {
+    display: flex;
+  }
+  
 `;
+
 const Toggleitems = styled.div``;
 
 const Navbar = () => {
@@ -167,27 +356,33 @@ const Navbar = () => {
   return (
     <Container>
       <NavupList>
-        <Img src="./images/lg.png" />
+        <Logo>
+          <Img src="./images/lg.png" />
+        </Logo>
 
         <Navup>
+          {toggle ? (
+            <>
+              <Navlistabtn>
+                <Navlist>
+                  <NavlistItem>Find Events</NavlistItem>
+                  <NavlistItem>Orgnaize Events</NavlistItem>
+                  <NavlistItem>About</NavlistItem>
+                  <NavlistItem>Log In</NavlistItem>
+                </Navlist>
+                <Navbtn>Get Started</Navbtn>
+              </Navlistabtn>
+            </>
+          ) : (
+            ""
+          )}
           <Toggle
             onClick={() => {
               setToggle(!toggle);
             }}
           >
-            <MenuIcon />
+            <MenuIcon style={{ fontSize: "100px", color: "#fff" }} />
           </Toggle>
-          {toggle ? (
-            <Navlist>
-              <NavlistItem>Find Events</NavlistItem>
-              <NavlistItem>Orgnaize Events</NavlistItem>
-              <NavlistItem>About</NavlistItem>
-              <NavlistItem>Log In</NavlistItem>
-            </Navlist>
-          ) : (
-            ""
-          )}
-          <Navbtn>Get Started</Navbtn>
         </Navup>
       </NavupList>
       <Navdown>
@@ -205,3 +400,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+///https://images.pexels.com/photos/3038740/pexels-photo-3038740.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2
