@@ -1,190 +1,48 @@
-import React from "react";
-import styled from "styled-components";
+import * as React from "react";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import { Box } from "@mui/system";
 
-const Container = styled.div`
-  //phones
-  @media (max-width: 480px) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  //tablets
-  @media (min-width: 481px) and (max-width: 768px) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-      //latptops
-      @media (min-width: 769px) and (max-width: 1024px) {
-        display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-`;
-const Wraper = styled.div`
-  margin-left: 50px;
-  margin-top: 50px;
-  width: 250px;
-  height: 400px;
-  background-color: #fafafa;
-  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
-
-  //phones
-  @media (max-width: 480px) {
-    width: 300vw;
-    height: 1550px;
-    background-color: #fafafa;
-    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
-    margin-left: 0px;
-  }
-  //tablets
-  @media (min-width: 481px) and (max-width: 768px) {
-    width: 150vw;
-    height: 1500px;
-  }
-  @media (min-width: 769px) and (max-width: 1024px) {
-    width: 100vw;
- height: 1000px;}
-`;
-const CardImg = styled.img`
-  width: 250px;
-  height: 150px;
-  @media (max-width: 480px) {
-    width: 300vw;
-    height: 850px;
-  }
-  //tablets
-  @media (min-width: 481px) and (max-width: 768px) {
-    width: 150vw;
-    height: 500px;
-  }
-  @media (min-width: 769px) and (max-width: 1024px) {
-    width: 100vw;
-    height: 400px;
-
-}
-  
-`;
-const CardTitle = styled.h2`
-  font-size: 15px;
-  font-family: "Varela", sans-serif;
-  padding-left: 10px;
-  padding-top: 10px;
-  font-weight: bold;
-  color: #554994;
-  @media (max-width: 480px) {
-    font-size: 60px;
-    font-weight: bolder;
-    padding-left: 30px;
-  }
-   //tablets
-   @media (min-width: 481px) and (max-width: 768px) {
-    font-size: 70px;
-    font-weight: bolder;
-    padding-left: 60px;
-  }
-  @media (min-width: 769px) and (max-width: 1024px) {
-    font-size: 50px;
-    font-weight: bolder;
-padding-left: 30px;
-}
-`;
-const CardDate = styled.h3`
-  font-size: 12px;
-  font-family: "Inter", sans-serif;
-  padding-left: 10px;
-  padding-top: 20px;
-  color: #f675a8;
-  @media (max-width: 480px) {
-    font-size: 50px;
-    font-weight: bolder;
-    padding-left: 30px;
-  }
-     //tablets
-     @media (min-width: 481px) and (max-width: 768px) {
-      font-size: 50px;
-    font-weight: bolder;
-    padding-left: 30px;
-  }
-  @media (min-width: 769px) and (max-width: 1024px) {
-    font-size: 50px;
-    font-weight: bolder;
-    padding-left: 30px;
-}
-`;
-const CardType = styled.h4`
-  font-size: 13px;
-  padding-left: 10px;
-  padding-top: 10px;
-  font-family: "Inter", sans-serif;
-  @media (max-width: 480px) {
-    font-size: 45px;
-    padding-left: 30px;
-  }
-  @media (min-width: 481px) and (max-width: 768px) {
-    font-size: 45px;
-    padding-left: 30px;
-  }
-  @media (min-width: 769px) and (max-width: 1024px) {
-    font-size: 45px;
-    padding-left: 30px;
-}
-`;
-const Atendees = styled.h5`
-  padding-left: 10px;
-  padding-top: 10px;
-  font-family: "Inter", sans-serif;
-  @media (max-width: 480px) {
-    font-size: 35px;
-    padding-left: 30px;
-  }
-  @media (min-width: 481px) and (max-width: 768px) {
-    font-size: 35px;
-    padding-left: 30px;
-  }
-  @media (min-width: 769px) and (max-width: 1024px) {
-    font-size: 35px;
-    padding-left: 30px;
-}
-`;
-const Usertitle = styled.h6`
-  padding-left: 10px;
-  padding-top: 10px;
-  font-family: "Inter", sans-serif;
-  color: #554994;
-  font-size: 16px;
-  @media (max-width: 480px) {
-    font-size: 30px;
-    padding-left: 30px;
-    padding-bottom: 20px;
-  }
-  @media (min-width: 481px) and (max-width: 768px) {
-    font-size: 30px;
-    padding-left: 30px;
-    padding-bottom: 20px;
-  }
-  @media (min-width: 769px) and (max-width: 1024px) {
-    font-size: 30px;
-    padding-left: 30px;
-    padding-bottom: 20px;
-}
-`;
-
-const Card = () => {
+export default function MediaCard() {
   return (
-    <Container>
-      <Wraper>
-        <CardImg src="https://images.pexels.com/photos/13692259/pexels-photo-13692259.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" />
-        <CardTitle>
-          the next life is workigs Lorem tempore repellendus!
-        </CardTitle>
-        <CardDate>Sat,nov20,10:20AM</CardDate>
-        <CardType>Online Events</CardType>
-        <Atendees>30 Atendees</Atendees>
-        <Usertitle>ice works</Usertitle>
-      </Wraper>
-    </Container>
-  );
-};
+    <Box sx={{
 
-export default Card;
+      display: 'flex',
+  
+   
+    }}>
+      <Card sx={{ maxWidth:300, m: "30px" }}>
+        <CardMedia
+          component="img"
+          height="140"
+          image="https://images.pexels.com/photos/1482476/pexels-photo-1482476.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+          alt="green iguana"
+        />
+        <CardContent sx={{height:"200px"}}>
+          <Typography gutterBottom variant="h6" component="div" sx={{height:"max-content"}}>
+   Lorem ipsum dolor sit amet consectetur adipisicing elit. consectetur adipisicing elit. 
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            <Typography variant="body2" sx={{    color: "#554994"}}>
+              Sat,nov20,10:20AM
+            </Typography>
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Online Events
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            30 Attendees
+          </Typography>
+          <Typography variant="body1" sx={{    color: "#F675A8"}}>
+            ice Eorks
+          </Typography>
+        </CardContent>
+        <CardActions></CardActions>
+      </Card>
+    </Box>
+  );
+}

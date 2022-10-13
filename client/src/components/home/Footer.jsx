@@ -1,244 +1,68 @@
+import { Typography } from "@mui/material";
+import { Box } from "@mui/system";
 import React from "react";
 import styled from "styled-components";
 
-export default function Footer() {
-  const Container = styled.footer`
-    display: flex;
-    flex-direction: column;
+const Img = styled.img`
+  width: max-content;
+  height: max-content;
+`;
 
-    @media (max-width: 480px) {
-      display: flex;
-      width: 400vw;
-      flex-direction: column;
-    }
-    @media (min-width: 481px) and (max-width: 768px) {
-      display: flex;
-      width: 400vw;
-      flex-direction: column;
-    
-    }
-    @media (min-width: 769px) and (max-width: 1024px) {
-      display: flex;
-      width: 400vw;
-      flex-direction: column;
-    
-    }
-  `;
-  const Footerone = styled.div`
-    display: flex;
-    justify-content: space-between;
-    margin-top: 100px;
-    width: 100%;
-    height: 200px;
-    background-color: red;
-    font-family: "Roboto", sans-serif;
-    color: #fff;
-    background-color: #554994;
-    padding-top: 50px;
-
-
-    @media (max-width: 480px) {
-      display: flex;
-      width: 400vw;
-      flex-direction: column;
-      height: max-content;
-
-      justify-content: flex-start;
-    }
-    @media (min-width: 481px) and (max-width: 768px) {
-      display: flex;
-      width: 400vw;
-      flex-direction: column;
-      height: max-content;
-
-      justify-content: flex-start;
-    }
-  `;
-  const Animlot = styled.ul`
-    font-size: 20px;
-    list-style: none;
-    @media (max-width: 480px) {
-      display: flex;
-      flex-direction: column;
-      margin-top: 50px;
-      font-size: 65px;
-      padding-left: 30px;
-    }
-    @media (min-width: 481px) and (max-width: 768px) {
-      display: flex;
-      flex-direction: column;
-      margin-top: 50px;
-      font-size: 95px;
-      padding-left: 30px;
-   
-    
-    }
-  `;
-  const AnimlotItems = styled.li`
-    font-size: 12px;
-    padding: 3px;
-    @media (max-width: 480px) {
-      font-size: 45px;
-    }
-    @media (min-width: 481px) and (max-width: 768px) {
-      font-size: 55px;
-    }
-  `;
-  const Resource = styled.ul`
-    font-size: 20px;
-    list-style: none;
-
-    @media (max-width: 480px) {
-      display: flex;
-      flex-direction: column;
-      margin-top: 50px;
-      font-size: 65px;
-      padding-left: 30px;
-    }
-    @media (min-width: 481px) and (max-width: 768px) {
-      display: flex;
-      flex-direction: column;
-      margin-top: 50px;
-      font-size: 95px;
-      margin-bottom: 50px;
-      padding-left: 30px;
-    }
-  `;
-  const Resourceitems = styled.li`
-    font-size: 12px;
-    padding: 3px;
-    @media (max-width: 480px) {
-      font-size: 45px;
-    }
-    @media (min-width: 481px) and (max-width: 768px) {
-      font-size: 55px;
-    }
-  `;
-  const Usecases = styled.ul`
-    font-size: 20px;
-    list-style: none;
-    padding-right: 50px;
-
-    @media (max-width: 480px) {
-      display: flex;
-      flex-direction: column;
-      margin-top: 50px;
-      font-size: 65px;
-      margin-bottom: 50px;
-     padding-left: 30px;
-    }
-    @media (min-width: 481px) and (max-width: 768px) {
-      display: flex;
-      flex-direction: column;
-      margin-top: 50px;
-      font-size: 95px;
-      margin-bottom: 50px;
-      padding-left: 30px;
-    }
-  `;
-  const Usecasesitems = styled.li`
-    font-size: 12px;
-    padding: 3px;
-    @media (max-width: 480px) {
-      font-size: 45px;
-    }
-    @media (min-width: 481px) and (max-width: 768px) {
-      font-size: 55px;
-    }
-  `;
-
-  const Footertwo = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    @media (max-width: 480px) {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-    }
-    @media (min-width: 481px) and (max-width: 768px) {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-    }
-  `;
-  const FooterImg = styled.img`
-    width: max-content;
-    height: max-content;
-    padding: 50px 30px;
-    @media (max-width: 480px) {
-      width: 450px;
-      height: 100px;
-    }
-    @media (min-width: 481px) and (max-width: 768px) {
-    width: 1000px;
-    height: 200px;
-    }
-  `;
-
-  const FooterTwoLits = styled.ul`
-    display: flex;
-    font-family: "Roboto", sans-serif;
-    list-style: none;
-    padding-top: 50px;
-    padding-bottom: 20px;
-    @media (max-width: 480px) {
-      font-size: 50px;
-    }
-    @media (min-width: 481px) and (max-width: 768px) {
-  font-size: 80px;
-    }
-  `;
-  const FooterTwolistitems = styled.li`
-    padding: 5px;
-  `;
-  const Footertwotext = styled.p`
-    font-family: "Roboto", sans-serif;
-    padding-top: 50px;
-    padding-bottom: 20px;
-    margin-left: 20px;
-
-    @media (max-width: 480px) {
-      font-size: 40px;
-      margin-bottom: 20px;
-    }
-    @media (min-width: 481px) and (max-width: 768px) {
- font-size: 80px;
-      margin-bottom: 20px;
-    }
-  `;
+const Footer = () => {
   return (
-    <Container>
-      <Footerone>
-        <FooterImg src="/images/lg.png" />
-        <Animlot>
-          Wadabalan
-          <AnimlotItems>About</AnimlotItems>
-          <AnimlotItems>Service</AnimlotItems>
-          <AnimlotItems>Careers</AnimlotItems>
-          <AnimlotItems>Press</AnimlotItems>
-        </Animlot>
-        <Resource>
-          Resources
-          <Resourceitems>Blogs</Resourceitems>
-          <Resourceitems>Case studies</Resourceitems>
-        </Resource>
-        <Usecases>
-          Use cases
-          <Usecasesitems>small bussiness</Usecasesitems>
-          <Usecasesitems>creators </Usecasesitems>
-        </Usecases>
-      </Footerone>
-      <Footertwo>
-        <FooterTwoLits>
-          <FooterTwolistitems>terms |</FooterTwolistitems>
-          <FooterTwolistitems>privaciy |</FooterTwolistitems>
-          <FooterTwolistitems>Copywrite </FooterTwolistitems>
-        </FooterTwoLits>
-        <Footertwotext>© 2022 Wadabalan All Rights Reserved</Footertwotext>
-      </Footertwo>
-    </Container>
+    <Box
+      mt={30}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        width: "100%",
+        height: "max-height",
+      }}
+    >
+      <Box pl={2}
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          flexDirection: { xs: "column", sm: "column", md: "row" },
+          backgroundColor: "#554994",
+          height: "300px",
+          color: "#Fff",
+        }}
+      >
+        <Box pl={2} pt={2}>
+          <Img src="./images/lg.png" />
+        </Box>
+        <Box pt={2} display={"flex"} sx={{ flexDirection: "column" }}>
+          <Typography variant="h6">Wadabalan</Typography>
+          <Typography variant="p">About</Typography>
+          <Typography variant="p">Services</Typography>
+          <Typography variant="p">Careers</Typography>
+        </Box>
+        <Box pt={2} display={"flex"} sx={{ flexDirection: "column" }}>
+          <Typography variant="h6">Resources</Typography>
+          <Typography variant="p">Blogs</Typography>
+          <Typography variant="p">Press</Typography>
+         
+        </Box>
+        <Box pr={2} pt={2} display={"flex"} sx={{ flexDirection: "column" }}>
+          <Typography variant="h6">Use cases</Typography>
+          <Typography variant="p">Organizers</Typography>
+          <Typography variant="p">Creators</Typography>
+
+        </Box>
+      </Box>
+      <Box  gap={2} alignItems={"center"} justifyContent={"center"} display={"flex"} sx={{ width: "100%", backgroundColor: "#fff", height: "100px" ,flexDirection: { xs: "column", sm: "column", md: "row" } , fontFamily: "Roboto, sans-serif" }}>
+        {" "}
+        <Box gap={2} display={"flex"}>
+          <Typography variant="p">Terms |</Typography>
+          <Typography variant="p">Privacy
+ |</Typography>
+          <Typography variant="p">Copywriter |</Typography>
+        </Box>
+        <Box>© 2011 wadabaln All Rights Reserved</Box>
+      </Box>
+    </Box>
   );
-}
+};
+
+export default Footer;
