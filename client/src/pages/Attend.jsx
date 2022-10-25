@@ -16,14 +16,7 @@ import {
 import Mininav from "../components/home/Mininav";
 
 export default function Attend() {
-  const datas = [
-    {
-      name: "",
-      email: "",
-      gender: "",
-    },
-  ];
-
+  const data = [{ name: "", email: "", gender: "" }];
   const location = useLocation();
   console.log(location);
   const path = location.pathname.split("/")[1];
@@ -31,35 +24,29 @@ export default function Attend() {
 
   const { currentEvent } = useSelector((state) => state.event);
   console.log(currentEvent);
-  const [attendess, setAttendees] = useState(
+  const [attendees, setAttendees] = useState([
     {
       name: "",
       email: "",
       gender: "",
     },
-  );
-
+  ]);
+  ///onchange funtion
   const handleChange = (e) => {
-    attendess((prev) => {
+    setAttendees((prev) => {
       return { ...prev, [e.target.name]: e.target.value };
     });
- 
   };
 
-  const [name, setname] = useState("");
-  const [email, setEmail] = useState("");
-  const [gender, seGender] = useState("");
+  //submit funcion
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const newAttend = {
-      name: attendess.name,
-      email: attendess.email,
-      gender: attendess.gender,
-    };
 
     try {
-      const res = await axios.put("/events/" + path, newAttend);
+      const res = await axios.put("/events/" + path, {
+        attendees,
+      });
       console.log(res.data);
       //window.location.replace("/post/" + res.data._id);
     } catch (err) {}
@@ -143,3 +130,7 @@ export default function Attend() {
     </Box>
   );
 }
+
+//  const [name, setname] = useState("");
+//const [email, setEmail] = useState("");
+//const [gender, seGender] = useState("");

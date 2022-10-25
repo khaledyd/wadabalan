@@ -14,13 +14,24 @@ export const addEvent = async (req, res, next) => {
   }
 };
 
+
+
 //attend event
+export const attendevents = async (req, res, next) => {
+  const newEvent = new Event(req.body);
+  try {
+    const savedEvent = await newEvent.save();
+    res.status(200).json(savedEvent);
+  } catch (err) {
+    next(err);
+  }
+};
 
 export const attendevent = async (req, res) => {
   try {
     const event = await Event.findById(req.params.id);
     if (!event) {
-      res.status(403).json("you can update only your post");
+      res.status(403).json("wrong event id");
     } else {
       try {
         const updatedEvent = await Event.findByIdAndUpdate(
