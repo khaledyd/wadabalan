@@ -5,6 +5,9 @@ import userRoutes from "./routes/users.js";
 import eventRoutes from "./routes/events.js";
 import authRoutes from "./routes/auth.js";
 import cookieParser from "cookie-parser";
+import multer  from "multer";
+import path from "path";
+import { fileURLToPath } from 'url';
 
 
 
@@ -14,7 +17,30 @@ const app = express();
 dotenv.config();
 app.use(express.json());
 
+const __filename = fileURLToPath(import.meta.url);
 
+const __dirname = path.dirname(__filename);
+
+
+app.use("/images", express.static(path.join(__dirname, "/images")));
+
+
+
+
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "images");
+  },
+  filename: (req, file, cb) => {
+    cb(null, req.body.name);
+  },
+});
+
+const upload = multer({ storage: storage });
+app.post("/api/upload", upload.single("file"), (req, res) => {
+  res.status(200).json("File has been uploaded");
+});
 
 
 
@@ -39,6 +65,7 @@ app.use("/api/events", eventRoutes);
 
 
 
+
 //error handler
 app.use((err, req, res, next) => {
   const status = err.status || 500;
@@ -50,7 +77,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(5002, () => {
+app.listen(5004, () => {
   connect();
   console.log("Connected to Server");
 });

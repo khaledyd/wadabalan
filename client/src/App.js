@@ -11,8 +11,11 @@ import Attend from "./pages/Attend";
 import Userhomepage from "./pages/Userhomepage";
 import Settings from "./pages/Settings";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function App() {
+  const { currentUser } = useSelector((state) => state.user);
+
   return (
     <div>
       {/*  
@@ -34,11 +37,11 @@ function App() {
           <Route exact path="/Login" element={<Login />} />
           <Route exact path="/Signup" element={<Signup />} />
           <Route exact path="/Upcomming" element={<Upcomming />} />
-          <Route exact path="/Singlevent" element={<Singlevent />} />
-          <Route exact path="/Attend" element={<Attend />} />
-          <Route exact path="/Orgnaize" element={<Orgnaize />} />
-          <Route exact path="/Userhomepage" element={<Userhomepage />} />
-          <Route exact path="/Settings" element={<Settings />} />
+          <Route exact path="card/:eventId" element={<Singlevent />} />
+          <Route exact path="/:eventId" element={<Attend />} />
+          <Route exact path="/Orgnaize" element={currentUser?<Orgnaize/> : <Login />} />
+          <Route exact path="/Userhomepage" element={currentUser?<Userhomepage />:<Login/>} />
+          <Route exact path="/Settings" element={currentUser?<Settings />:<Login/>} />
         </Routes>
       </Router>
     </div>

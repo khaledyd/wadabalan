@@ -2,10 +2,6 @@ import mongoose from "mongoose";
 
 const EventsSchema = new mongoose.Schema(
   {
-    userId: {
-      type: String,
-      required: true,
-    },
     title: {
       type: String,
       required: true,
@@ -23,11 +19,13 @@ const EventsSchema = new mongoose.Schema(
       required: true,
     },
     spots: {
+      required: true,
       type: Number,
       default: 0,
     },
     file: {
       type: String,
+  
     },
     date: {
       type: String,
@@ -35,22 +33,22 @@ const EventsSchema = new mongoose.Schema(
     },
     img: {
       type: String,
-  
     },
-    fullname: {
-      type: String,
-   
-    },
-    email: {
-      type: String,
-    
-    },
-    gender: {
-      type: Array,
 
-    },
+    attendess: [
+      {
+        name: {
+          type: String,
+        },
+        emailaddres: {
+          type: String,
+          unique: true,
+        },
+        gender: [Array],
+      },
+    ],
   },
-  
+
   { timestamps: true }
 );
 

@@ -7,6 +7,9 @@ import styled from "styled-components";
 import Steps from "../components/home/Steps";
 import Popular from "../components/home/Popular";
 import Footer from "../components/home/Footer";
+import { useState, useEffect } from "react";
+import axios from "axios";
+
 
 const Vstrong = styled.strong`
   color: #f35588;
@@ -16,12 +19,28 @@ const Step = styled.h1`
   margin: 30px;
 `;
 
+
+
 const Home = () => {
+
+
+
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      const res = await axios.get("/events");
+      setEvents(res.data);
+      console.log(res.data);
+    };
+    fetchEvents();
+  }, []);
+
+
   return (
     <div>
       <Navbar />
       <Typography
-        variant="h3"
         sx={{
           m: "30px",
           color: "#F675A8",
@@ -37,10 +56,9 @@ const Home = () => {
           justifyContent: { xs: "center", ms: "flex-start", md: "flex-start" },
         }}
       >
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+        {events.map((e) => (
+          <Card events={e} />
+        ))}
       </Box>
       <Step>
         With the <Vstrong> simple </Vstrong> Steps you can attend event{" "}
@@ -48,13 +66,15 @@ const Home = () => {
       <Steps />
       <Step style={{ color: "#F675A8" }}>Popular Organizers</Step>
 
-      <Box gap={4} pl={"30px"} sx={{ width:{ xs: "100%", sm:"100%", md:"100%"}, display: "flex" }}>
-        <Popular style={{
-      
-        }}  />
+      <Box
+        gap={4}
+        pl={"30px"}
+        sx={{ width: { xs: "100%", sm: "100%", md: "100%" }, display: "flex" }}
+      >
+        <Popular style={{}} />
         <Popular />
       </Box>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

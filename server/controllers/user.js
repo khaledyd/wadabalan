@@ -1,6 +1,6 @@
 import { createError } from "../error.js";
 import User from "../models/User.js";
-import Events from "../models/Events.js";
+
 
 export const update = async (req, res, next) => {
   if (req.params.id === req.user.id) {
@@ -51,7 +51,7 @@ export const subscribe = async (req, res, next) => {
     await User.findByIdAndUpdate(req.params.id, {
       $inc: { subscribers: 1 },
     });
-    res.status(200).json("Subscription successfull.")
+    res.status(200).json("Subscription successfull.");
   } catch (err) {
     next(err);
   }
@@ -66,7 +66,7 @@ export const unsubscribe = async (req, res, next) => {
       await User.findByIdAndUpdate(req.params.id, {
         $inc: { subscribers: -1 },
       });
-      res.status(200).json("Unsubscription successfull.")
+      res.status(200).json("Unsubscription successfull.");
     } catch (err) {
       next(err);
     }
@@ -75,29 +75,66 @@ export const unsubscribe = async (req, res, next) => {
   }
 };
 
-export const like = async (req, res, next) => {
-  const id = req.user.id;
-  const videoId = req.params.videoId;
+/*export const attend = async (req, res, next) => {
+  const eventId = req.params._id;
   try {
-    await Video.findByIdAndUpdate(videoId,{
-      $addToSet:{likes:id},
-      $pull:{dislikes:id}
-    })
-    res.status(200).json("The video has been liked.")
+    if (!eventId) return next(createError(404, "eventid not found!"));
+    else{
+      const event = await Events.findByIdAndUpdate(
+        eventId,
+        {
+          $set: req.body,
+        },
+        { new: true }
+      );
+  
+  
+   
+      const events = await event.save({
+        
+      });
+      res.status(200).json(events + "The event has been atended.");
+    }
+    
+  } 
+
+
+  catch (err) {
+    next(err);
+  }
+};
+///
+export const attendeese = async (req, res, next) => {
+  const id = req.user.id;
+  const eventId = req.params.eventId;
+  const fullname = req.user.fullname;
+  const email = req.user.email;
+  const gender = req.user.gender;
+
+  try {
+    await Attendees.findByIdAndUpdate(eventId, {
+      $addToSet: { fullname: fullname },
+      $addToSet: { userId: id },
+      $addToSet: { email: email },
+      $addToSet: { gender: gender },
+    });
+    res.status(200).json("The video has been liked.");
   } catch (err) {
     next(err);
   }
 };
 
+//*/
+
 export const dislike = async (req, res, next) => {
-    const id = req.user.id;
-    const videoId = req.params.videoId;
-    try {
-      await Video.findByIdAndUpdate(videoId,{
-        $addToSet:{dislikes:id},
-        $pull:{likes:id}
-      })
-      res.status(200).json("The video has been disliked.")
+  const id = req.user.id;
+  const videoId = req.params.videoId;
+  try {
+    await Video.findByIdAndUpdate(videoId, {
+      $addToSet: { dislikes: id },
+      $pull: { likes: id },
+    });
+    res.status(200).json("The video has been disliked.");
   } catch (err) {
     next(err);
   }

@@ -1,126 +1,79 @@
 import User from "../models/User.js";
+import Event from "../models/Event.js";
 import Events from "../models/Events.js";
 import { createError } from "../error.js";
 
-export const addVideo = async (req, res, next) => {
-  const newVideo = new Events({ userId: req.user.id, ...req.body });
+//create event
+export const addEvent = async (req, res, next) => {
+  const newEvent = new Event(req.body);
   try {
-    const savedVideo = await newVideo.save();
-    res.status(200).json(savedVideo);
+    const savedEvent = await newEvent.save();
+    res.status(200).json(savedEvent);
   } catch (err) {
     next(err);
   }
 };
 
-export const updateVideo = async (req, res, next) => {
+//attend event
+
+export const attendevent = async (req, res) => {
   try {
-    const video = await Events.findById(req.params.id);
-    if (!video) return next(createError(404, "Video not found!"));
-    if (req.user.id === video.userId) {
-      const updatedVideo = await Events.findByIdAndUpdate(
-        req.params.id,
-        {
-          $set: req.body,
+    const event = await Event.findById(req.params.id);
+    if (!event) {
+      res.status(403).json("you can update only your post");
+    } else {
+      try {
+        const updatedEvent = await Event.findByIdAndUpdate(
+          req.params.id,
+          {
+            $push: req.body,
+          },
+          { new: true }
+        );
+        res.status(200).json(updatedEvent);
+      } catch (err) {
+        next();
+      }
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
+/// GET EVENTS
+
+export const getallevents = async (req, res) => {
+  const username = req.query.user;
+  const catName = req.query.cat;
+  try {
+    let events;
+    if (username) {
+      events = await Event.find({ username });
+    } /*else if (catName) {
+      posts = await Post.find({
+        categories: {
+          $in: [catName],
         },
-        { new: true }
-      );
-      res.status(200).json(updatedVideo);
-    } else {
-      return next(createError(403, "You can update only your video!"));
+      });
+    }*/ else {
+      events = await Event.find();
     }
+    res.status(200).json(events);
   } catch (err) {
-    next(err);
+    res.status(500).json(err);
   }
 };
 
-export const deleteVideo = async (req, res, next) => {
+//GET POST
+export const getevent = async (req, res) => {
   try {
-    const video = await Events.findById(req.params.id);
-    if (!video) return next(createError(404, "Video not found!"));
-    if (req.user.id === video.userId) {
-      await Events.findByIdAndDelete(req.params.id);
-      res.status(200).json("The video has been deleted.");
-    } else {
-      return next(createError(403, "You can delete only your video!"));
-    }
+    const event = await Event.findById(req.params.id);
+    res.status(200).json(event);
   } catch (err) {
-    next(err);
+    res.status(500).json(err);
   }
 };
 
-export const getVideo = async (req, res, next) => {
-  try {
-    const video = await Events.findById(req.params.id);
-    res.status(200).json(video);
-  } catch (err) {
-    next(err);
-  }
-};
-
-export const addView = async (req, res, next) => {
-  try {
-    await Video.findByIdAndUpdate(req.params.id, {
-      $inc: { views: 1 },
-    });
-    res.status(200).json("The view has been increased.");
-  } catch (err) {
-    next(err);
-  }
-};
-
-export const random = async (req, res, next) => {
-  try {
-    const videos = await Events.aggregate([{ $sample: { size: 40 } }]);
-    res.status(200).json(videos);
-  } catch (err) {
-    next(err);
-  }
-};
-
-export const trend = async (req, res, next) => {
-  try {
-    const videos = await Events.find().sort({ views: -1 });
-    res.status(200).json(videos);
-  } catch (err) {
-    next(err);
-  }
-};
-
-export const sub = async (req, res, next) => {
-  try {
-    const user = await User.findById(req.user.id);
-    const subscribedChannels = user.subscribedUsers;
-
-    const list = await Promise.all(
-      subscribedChannels.map(async (channelId) => {
-        return await Video.find({ userId: channelId });
-      })
-    );
-
-    res.status(200).json(list.flat().sort((a, b) => b.createdAt - a.createdAt));
-  } catch (err) {
-    next(err);
-  }
-};
-
-export const getByTag = async (req, res, next) => {
-  const tags = req.query.tags.split(",");
-  try {
-    const videos = await Events.find({ tags: { $in: tags } }).limit(20);
-    res.status(200).json(videos);
-  } catch (err) {
-    next(err);
-  }
-};
-
-export const search = async (req, res, next) => {
-  const query = req.query.q;
-  try {
-    const videos = await Events.find({
-      title: { $regex: query, $options: "i" },
-    }).limit(40);
-    res.status(200).json(videos);
-  } catch (err) {
-    next(err);
-  }
-};
+/* 	"name":"mikel",
+	"emailaddres":"mike@wqw.ccc",
+	"gender":"male" */
