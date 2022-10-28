@@ -33,7 +33,9 @@ const Ticket = ({ array }) => {
             <Typography variant="h4" sx={{ color: "#554994"  }}>
               {array.title}
             </Typography>
-            <Typography variant="h6"> {array.userfullname}</Typography>
+            <Typography variant="h6" sx={{
+              color:"#F675A8"
+            }}> {array.userfullname}</Typography>
             <Typography variant="h6">{array.eventtype}</Typography>
             <Typography variant="h6"> {array.address}</Typography>
           </Box>
@@ -44,8 +46,10 @@ const Ticket = ({ array }) => {
           mt={10}
           sx={{ width: "60%", fontFamily: "Roboto, sans-serif" }}
         >
-          <Typography variant="h3">Details</Typography>
-          <Typography variant="p">{array.details}</Typography>
+          <Typography variant="h3" sx={{
+            color:"#554994"
+          }}>Details</Typography>
+          <Typography variant="p" >{array.details}</Typography>
         </Box>
         <Box
           alignItems={"center"}

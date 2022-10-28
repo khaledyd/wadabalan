@@ -2,7 +2,7 @@ import * as React from "react";
 import axios from "axios";
 import TextField from "@mui/material/TextField";
 import { useSelector } from "react-redux";
-import { Box } from "@mui/system";
+import { Box, fontSize } from "@mui/system";
 import { useLocation } from "react-router";
 import { useState, useEffect } from "react";
 import {
@@ -32,10 +32,12 @@ export default function Attend() {
       name: "",
       email: "",
       gender: "",
+      objectId: "_id",
     },
   ]);
   const [ticket, setTicket] = useState(false);
   const [ticketdata, setTicketData] = useState([]);
+
   const array = [ticketdata];
   console.log(array[0].details);
   ///onchange funtion
@@ -81,9 +83,16 @@ export default function Attend() {
             return <Ticket array={t} />;
           })}
           <Box>
-          <Typography variant="h5"  sx={{
-                  marginLeft: "3%",
-                }} >Order Infromation</Typography>
+            <Typography
+              variant="h5"
+              sx={{
+                marginLeft: "3%",
+
+                color: "#F675A8",
+              }}
+            >
+              Order Infromation
+            </Typography>
             <Box>
               <Typography
                 variant="h6"
@@ -91,10 +100,19 @@ export default function Attend() {
                   marginLeft: "3%",
                 }}
               >
-              Order Id : 
-                {attendees._id}
+                Ordered By : {attendees.name}
               </Typography>
             </Box>
+            <Typography
+              variant="h6"
+              sx={{
+                marginLeft: "3%",
+                marginTop:"50px",
+                fontSize:"12px"
+              }}
+            >
+        Powered By WADABALAN
+            </Typography>
           </Box>
         </>
       ) : (

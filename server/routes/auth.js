@@ -64,8 +64,8 @@ router.post("/send-otp", async (req, res) => {
 ////////////// send email
 
 function sendEmail(receiver) {
-  const yourEmail = "mofarah0200@gmail.com";
-  const yourPassword = "wizppzukwnmjfbyd";
+  const yourEmail =  process.env.email
+  const yourPassword =  process.env.password
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
