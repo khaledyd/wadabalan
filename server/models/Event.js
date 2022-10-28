@@ -50,6 +50,13 @@ const EventSchema = new mongoose.Schema(
 );
 
 export default mongoose.model("Event", EventSchema);
+
+
+
+
+
+
+
 /*"title":"hiejdjd",
 	"details":"hahhdhdheaha",
 	"eventtype":"oenddline",

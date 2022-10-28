@@ -4,7 +4,7 @@ import TextField from "@mui/material/TextField";
 import { useSelector } from "react-redux";
 import { Box } from "@mui/system";
 import { useLocation } from "react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Button,
   FormControl,
@@ -14,8 +14,11 @@ import {
   Typography,
 } from "@mui/material";
 import Mininav from "../components/home/Mininav";
+import { useNavigate } from "react-router-dom";
+import Ticket from "./Ticket";
 
 export default function Attend() {
+  const navigate = useNavigate();
   const data = [{ name: "", email: "", gender: "" }];
   const location = useLocation();
   console.log(location);
@@ -31,6 +34,10 @@ export default function Attend() {
       gender: "",
     },
   ]);
+  const [ticket, setTicket] = useState(false);
+  const [ticketdata, setTicketData] = useState([]);
+  const array = [ticketdata];
+  console.log(array[0].details);
   ///onchange funtion
   const handleChange = (e) => {
     setAttendees((prev) => {
@@ -38,6 +45,16 @@ export default function Attend() {
     });
   };
 
+  useEffect(() => {
+    const getPost = async () => {
+      const res = await axios.get("/events/" + path);
+      //console.log(res.data);
+      setTicketData(res.data);
+    };
+
+    getPost();
+  }, [path]);
+  //console.log(ticketdata);
   //submit funcion
 
   const handleSubmit = async (e) => {
@@ -48,86 +65,116 @@ export default function Attend() {
         attendees,
       });
       console.log(res.data);
+      setTicket(true);
+      ///res.data && window.location.replace("/EventAttendees");
       //window.location.replace("/post/" + res.data._id);
-    } catch (err) {}
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
-    <Box
-      alignItems={"center"}
-      flexDirection={"column"}
-      display={"flex"}
-      justifyContent={"center"}
-      sx={{ width: "100%" }}
-    >
-      <Mininav />
-      <Box
-        mt={15}
-        flexDirection={"column"}
-        alignItems={"center"}
-        justifyContent={"center"}
-        display={"flex"}
-        sx={{
-          width: { xs: "100%", sm: "100%", md: "40%" },
-          backgroundColor: "#FAFAFA",
-          boxShadow: " 0 3px 10px rgb(0 0 0 / 0.2)",
-        }}
-      >
-        <TextField
-          mt={10}
-          id="filled-password-input"
-          label="Fullname"
-          type="text"
-          autoComplete="current-password"
-          variant="filled"
-          sx={{ marginTop: "10px" }}
-          name="name"
-          onChange={handleChange}
-          //onChange={(e) => setname(e.target.value)}
-        />
-
-        <TextField
-          mt={10}
-          id="filled-password-input"
-          label="Email"
-          type="email"
-          autoComplete="current-password"
-          variant="filled"
-          sx={{ marginTop: "10px" }}
-          name="email"
-          onChange={handleChange}
-          //onChange={(e) => setEmail(e.target.value)}
-        />
-
-        <Select
-          mt={10}
-          //onChange={(e) => seGender(e.target.value)}
-          labelId="demo-simple-select-label"
-          label="Event Type"
-          sx={{ marginTop: "10px" }}
-          name="gender"
-          onChange={handleChange}
+    <div>
+      {ticket ? (
+        <>
+          {array.map((t) => {
+            return <Ticket array={t} />;
+          })}
+          <Box>
+          <Typography variant="h5"  sx={{
+                  marginLeft: "3%",
+                }} >Order Infromation</Typography>
+            <Box>
+              <Typography
+                variant="h6"
+                sx={{
+                  marginLeft: "3%",
+                }}
+              >
+              Order Id : 
+                {attendees._id}
+              </Typography>
+            </Box>
+          </Box>
+        </>
+      ) : (
+        <Box
+          alignItems={"center"}
+          flexDirection={"column"}
+          display={"flex"}
+          justifyContent={"center"}
+          sx={{ width: "100%" }}
         >
-          <MenuItem value={"male"}>Male</MenuItem>
-          <MenuItem value={"Female"}>Femaile</MenuItem>
-        </Select>
+          <Mininav />
+          <Box
+            mt={15}
+            flexDirection={"column"}
+            alignItems={"center"}
+            justifyContent={"center"}
+            display={"flex"}
+            sx={{
+              width: { xs: "100%", sm: "100%", md: "40%" },
+              backgroundColor: "#FAFAFA",
+              boxShadow: " 0 3px 10px rgb(0 0 0 / 0.2)",
+            }}
+          >
+            <TextField
+              mt={10}
+              id="filled-password-input"
+              label="Fullname"
+              type="text"
+              autoComplete="current-password"
+              variant="filled"
+              sx={{ marginTop: "10px" }}
+              name="name"
+              onChange={handleChange}
+              //onChange={(e) => setname(e.target.value)}
+            />
 
-        <Button
-          onClick={handleSubmit}
-          type="submit"
-          mt={15}
-          variant="contained"
-          sx={{
-            width: "50%",
-            marginTop: "10px",
-            marginBottom: "50px",
-            backgroundColor: "#F675A8",
-          }}
-        >
-          Attend
-        </Button>
-      </Box>
-    </Box>
+            <TextField
+              mt={10}
+              id="filled-password-input"
+              label="Email"
+              type="email"
+              autoComplete="current-password"
+              variant="filled"
+              sx={{ marginTop: "10px" }}
+              name="email"
+              onChange={handleChange}
+              //onChange={(e) => setEmail(e.target.value)}
+            />
+
+            <Select
+              mt={10}
+              //onChange={(e) => seGender(e.target.value)}
+              labelId="demo-simple-select-label"
+              label="Event Type"
+              sx={{ marginTop: "10px" }}
+              name="gender"
+              onChange={handleChange}
+            >
+              <MenuItem value={"male"}>Male</MenuItem>
+              <MenuItem value={"Female"}>Femaile</MenuItem>
+            </Select>
+
+            <Button
+              onClick={handleSubmit}
+              type="submit"
+              mt={15}
+              variant="contained"
+              sx={{
+                width: "50%",
+                marginTop: "10px",
+                marginBottom: "50px",
+                backgroundColor: "#F675A8",
+              }}
+            >
+              Attend
+            </Button>
+          </Box>
+        </Box>
+      )}
+    </div>
   );
 }
 
