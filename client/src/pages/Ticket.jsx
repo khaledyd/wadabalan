@@ -4,6 +4,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Footer from "../components/home/Footer";
 
+
 const Ticket = ({ array }) => {
   return (
     <div>
@@ -39,17 +40,19 @@ const Ticket = ({ array }) => {
             <Typography variant="h6">{array.eventtype}</Typography>
             <Typography variant="h6"> {array.address}</Typography>
           </Box>
-          <Box  >{array.date}</Box>
+          <Box  >{new Date(array.date).toDateString()}</Box>
         </Box>
         <Box
           pl={5}
           mt={10}
-          sx={{ width: "60%", fontFamily: "Roboto, sans-serif" }}
+          sx={{ width: "60%", fontFamily: "Roboto, sans-serif", marginTop:"20px" }}
         >
           <Typography variant="h3" sx={{
             color:"#554994"
           }}>Details</Typography>
-          <Typography variant="p" >{array.details}</Typography>
+          <Typography variant="p" sx={{
+            marginTop:"30px"
+          }} >{array.details}</Typography>
         </Box>
         <Box
           alignItems={"center"}
@@ -67,3 +70,4 @@ const Ticket = ({ array }) => {
 };
 
 export default Ticket;
+

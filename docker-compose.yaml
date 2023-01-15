@@ -1,0 +1,30 @@
+version: "1.0"
+services:
+  mongodb:
+    image: "mongo"
+    environment: [process.env.MONG_URL]
+    volumes:
+      - data:/data/db
+  server:
+    build: ./server
+    ports:
+      - "80:80"
+    volumes:
+      - logs:/app/logs
+      - ./server:/app
+      - /app/node_modules
+    depends_on:
+      - mongodb
+  client:
+    build: ./client
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./clinet/src:/app/src
+
+    depends_on:
+      - server
+
+volumes:
+  data:
+  logs:

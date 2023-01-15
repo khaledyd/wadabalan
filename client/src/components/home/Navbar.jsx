@@ -6,11 +6,11 @@ import { IconButton, TextField, Theme } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { logout } from "../../Redux/userSlice";
 import { useDispatch } from "react-redux";
+import { useNaviagte, useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import {
   Button,
-  ImageList,
-  ImageListItem,
+
   ListItem,
   Typography,
 } from "@mui/material";
@@ -29,13 +29,16 @@ const NavBarItems = styled(Box)(({ theme }) => ({
 }));
 
 const Navbar = () => {
+const navigate = useNavigate()
   const { currentUser } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const handleLogout = () => {
     dispatch(logout());
   };
+
   return (
+    
     <Box
       sx={{
         backgroundImage: `url("https://images.pexels.com/photos/2449600/pexels-photo-2449600.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2")`,
@@ -80,13 +83,15 @@ const Navbar = () => {
                 display: { sm: "inline", xs: "inline", md: "flex" },
               }}
             >
-              <Typography variant="h6">Find Event</Typography>
+     
               <Typography variant="h6">Organize Event</Typography>
-              <Typography variant="h6">About</Typography>
+             
               {currentUser ? (
                 <Typography variant="h6">{currentUser.fullname}</Typography>
               ) : (
-                <Typography variant="h6">Log in</Typography>
+                <Typography variant="h6" onClick = {()=>navigate("/login")} sx={{
+                  cursor : "pointer",
+                }} >Log in</Typography>
               )}
             </Box>
 
@@ -114,7 +119,7 @@ const Navbar = () => {
               </Button>
             </Box>
             <Box>
-              <MenuIcon sx={{ color: "#fff" }} />
+       
             </Box>
           </Box>
         </Box>
@@ -139,25 +144,7 @@ const Navbar = () => {
             The next events are here !
           </Typography>
         </ListItem>
-        <Box
-          sx={{
-            width: "100%",
-            height: "50px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <TextField
-            sx={{
-              outline: "none",
-              width: "50%",
-              border: "solid 2px #fff",
-              outlineColor: "#fff",
-            }}
-          />
-          <SearchIcon sx={{ fontSize: "50px", color: "#fff" }} />
-        </Box>
+      
 
         <Box
           display={"flex"}
@@ -170,7 +157,7 @@ const Navbar = () => {
         >
           {" "}
           <Typography variant="h6" sx={{ color: "#fff" }}>
-            Search with rich filters
+         
           </Typography>
         </Box>
       </Stack>

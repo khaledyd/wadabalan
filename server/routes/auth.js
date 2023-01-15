@@ -40,7 +40,7 @@ router.post("/verify", async (req, res) => {
 
 //////////////////////////////send otp
 
-router.post("/send-otp", async (req, res) => {
+router.post("/sendotp", async (req, res) => {
   const email = req.body.email;
 
   // Check if email exists
@@ -49,10 +49,11 @@ router.post("/send-otp", async (req, res) => {
 
   //
   const user = email;
+  const buddy = req.body.buddy;
 
   const generatedOTP = Math.floor(1000 + Math.random() * 9000);
   try {
-    sendEmail(user);
+    sendEmail(user,buddy);
   } catch (error) {
     console.log(error);
   }
@@ -60,12 +61,12 @@ router.post("/send-otp", async (req, res) => {
   return res.status(200).send({ message: "OTP Sent" });
 });
 
-
 ////////////// send email
 
 function sendEmail(receiver) {
-  const yourEmail =  process.env.email
-  const yourPassword =  process.env.password
+ 
+  const yourEmail = process.env.email;
+  const yourPassword = process.env.password;
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -77,7 +78,7 @@ function sendEmail(receiver) {
     from: yourEmail,
     to: receiver,
     subject: "Verification Code",
-    text: `Dear User, your verification code is .`,
+    text: `Dear User, your verification code is ${receiver}.`,
   };
 
   transporter.sendMail(mailOptions, function (error, info) {

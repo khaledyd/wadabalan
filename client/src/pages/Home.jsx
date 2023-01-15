@@ -44,6 +44,7 @@ const Home = () => {
         sx={{
           m: "30px",
           color: "#F675A8",
+          fontSize:"28px"
         }}
       >
         Upcomming events

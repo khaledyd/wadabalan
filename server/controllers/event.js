@@ -14,8 +14,6 @@ export const addEvent = async (req, res, next) => {
   }
 };
 
-
-
 //attend event
 export const attendevents = async (req, res, next) => {
   const newEvent = new Event(req.body);
@@ -26,7 +24,7 @@ export const attendevents = async (req, res, next) => {
     next(err);
   }
 };
-
+//atted devent
 export const attendevent = async (req, res) => {
   try {
     const event = await Event.findById(req.params.id);
@@ -88,3 +86,50 @@ export const getevent = async (req, res) => {
 /* 	"name":"mikel",
 	"emailaddres":"mike@wqw.ccc",
 	"gender":"male" */
+
+// user atten
+
+export const userAttend = async (req, res) => {
+  try {
+    const event = await Event.findById(req.params.id);
+    if (!event) res.status(404).json("event not found");
+    else {
+      const name = req.body.name;
+      const gender = req.body.gender;
+      const email = req.body.email;
+      const attenees = event.attendees.length;
+      const sposts = event.spots;
+      if (sposts === 0) {
+        res.status(401).json("sposts are filled");
+      } else {
+        const updatetheattendees = await Event.findByIdAndUpdate(
+          req.params.id,
+          {
+            $push: {
+              attendees: {
+                name: name,
+                email: email,
+                gender: gender,
+              },
+            },
+          },
+          { new: true }
+        );
+
+        const updathethevent = await Event.findByIdAndUpdate(
+          req.params.id,
+          {
+            $set: {
+              "spots": sposts - 1,
+            },
+          },
+          { new: true }
+        );
+        console.log(updatedspots);
+        res.status(200).json(updatetheattendees);
+      }
+    }
+  } catch (err) {
+    res.status(500).json("error");
+  }
+};

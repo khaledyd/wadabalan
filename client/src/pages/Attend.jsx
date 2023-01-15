@@ -1,23 +1,21 @@
 import * as React from "react";
+import QRCode from "qrcode.react";
+import { nanoid } from "nanoid";
 import axios from "axios";
 import TextField from "@mui/material/TextField";
 import { useSelector } from "react-redux";
 import { Box, fontSize } from "@mui/system";
 import { useLocation } from "react-router";
-import { useState, useEffect } from "react";
-import {
-  Button,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  Typography,
-} from "@mui/material";
+import { useState, useEffect, useRef } from "react";
+import { Button, MenuItem, Select, Typography } from "@mui/material";
 import Mininav from "../components/home/Mininav";
 import { useNavigate } from "react-router-dom";
 import Ticket from "./Ticket";
+import html2canvas from "html2canvas";
+import { jsPDF } from "jspdf";
 
 export default function Attend() {
+  const printRef = useRef();
   const navigate = useNavigate();
   const data = [{ name: "", email: "", gender: "" }];
   const location = useLocation();
@@ -35,8 +33,10 @@ export default function Attend() {
       objectId: "_id",
     },
   ]);
+
   const [ticket, setTicket] = useState(false);
   const [ticketdata, setTicketData] = useState([]);
+  const [email, setEmail] = useState("");
 
   const array = [ticketdata];
   console.log(array[0].details);
@@ -65,8 +65,11 @@ export default function Attend() {
     try {
       const res = await axios.put("/events/" + path, {
         attendees,
+        data,
       });
-      console.log(res.data);
+      const ress = await axios.post("/auth/sendotp/", { email });
+      console.log(res.data.attendees);
+      console.log(ress.data);
       setTicket(true);
       ///res.data && window.location.replace("/EventAttendees");
       //window.location.replace("/post/" + res.data._id);
@@ -74,45 +77,71 @@ export default function Attend() {
       console.log(err);
     }
   };
+  const id = nanoid();
+  //
 
+  const handleDownloadPdf = async () => {
+    const element = printRef.current;
+    const canvas = await html2canvas(element);
+    const data = canvas.toDataURL("image/png");
+
+    const pdf = new jsPDF();
+    const imgProperties = pdf.getImageProperties(data);
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
+
+    pdf.addImage(data, "PNG", 0, 0, pdfWidth, pdfHeight);
+    pdf.save("print.pdf");
+  };
   return (
-    <div>
+    <div >
       {ticket ? (
         <>
-          {array.map((t) => {
-            return <Ticket array={t} />;
-          })}
           <Box>
-            <Typography
-              variant="h5"
-              sx={{
-                marginLeft: "3%",
+            <Box ref={printRef}>
+              {array.map((t) => {
+                return <Ticket array={t} />;
+              })}
+              <Typography
+                variant="h5"
+                sx={{
+                  marginLeft: "3%",
 
-                color: "#F675A8",
-              }}
-            >
-              Order Infromation
-            </Typography>
-            <Box>
+                  color: "#F675A8",
+                }}
+              >
+                Order Infromation
+              </Typography>
+              <Box>
+                <Typography
+                  variant="h6"
+                  sx={{
+                    marginLeft: "3%",
+                  }}
+                >
+                  Ordered By : {attendees.name}
+                </Typography>
+                <Typography
+                  variant="h6"
+                  sx={{
+                    marginLeft: "3%",
+                  }}
+                >
+                  Ordered Id : {id}
+                </Typography>
+              </Box>
               <Typography
                 variant="h6"
                 sx={{
                   marginLeft: "3%",
+                  marginTop: "50px",
+                  fontSize: "12px",
                 }}
               >
-                Ordered By : {attendees.name}
+                Powered By WADABALAN
               </Typography>
             </Box>
-            <Typography
-              variant="h6"
-              sx={{
-                marginLeft: "3%",
-                marginTop:"50px",
-                fontSize:"12px"
-              }}
-            >
-        Powered By WADABALAN
-            </Typography>
+            <Button onClick={handleDownloadPdf}>Dowanload</Button>
           </Box>
         </>
       ) : (
@@ -159,6 +188,19 @@ export default function Attend() {
               sx={{ marginTop: "10px" }}
               name="email"
               onChange={handleChange}
+              //onChange={(e) => setEmail(e.target.value)}
+            />
+            <TextField
+              mt={10}
+              id="filled-password-input"
+              label="Email"
+              type="email"
+              autoComplete="current-password"
+              variant="filled"
+              sx={{ marginTop: "10px" }}
+              name="email"
+              onChange={(e) => setEmail(e.target.value)}
+
               //onChange={(e) => setEmail(e.target.value)}
             />
 
