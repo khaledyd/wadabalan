@@ -13,7 +13,6 @@ const router = express.Router();
 
 
 router.post("/", addEvent);
-router.put("/:id", attendevent);
 router.get("/:id", getevent);
 router.get("/", getallevents);
 router.put("/userAttend/:id", userAttend);

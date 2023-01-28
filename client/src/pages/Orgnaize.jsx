@@ -1,7 +1,7 @@
 import * as React from "react";
 import dayjs from "dayjs";
-import axios from "axios";
-import { lotStart, lotSuccess,lotFailure} from "../Redux/eventSlice";
+
+import { lotStart, lotSuccess, lotFailure } from "../Redux/eventSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -19,12 +19,13 @@ import {
   Select,
   Typography,
 } from "@mui/material";
+import { axiosInstance } from "../config";
 import Mininav from "../components/home/Mininav";
 
 export default function BasicDateTimePicker() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { currentUser } = useSelector((state) => state.user);
 
   const [date, setValue] = React.useState(dayjs("2022-04-07"));
@@ -56,16 +57,15 @@ export default function BasicDateTimePicker() {
       data.append("file", file);
       newEvent.eventImg = filename;
       try {
-        await axios.post("/upload", data);
+        await axiosInstance.post("/upload", data);
       } catch (err) {}
     }
     try {
-      const res = await axios.post("/events", newEvent);
-      dispatch(lotSuccess(res.data))
-      console.log(res.data);
-      //window.location.replace("/post/" + res.data._id);
+      const res = await axiosInstance.post("/events", newEvent);
+   
+      navigate("/");
     } catch (err) {
-      dispatch(lotFailure())
+      dispatch(lotFailure());
     }
   };
 
@@ -103,15 +103,14 @@ export default function BasicDateTimePicker() {
           sx={{ width: { xs: "70%", sm: "70%", md: "70%" } }}
         >
           <TextField
-      
             mt={10}
             id="filled-password-input"
             label="name"
             type="text"
             autoComplete="current-password"
             variant="filled"
-            sx={{ marginTop: "10px",     display :"none" }}
-            onChange={(e)=>setName(e.target.value)}
+            sx={{ marginTop: "10px", display: "none" }}
+            onChange={(e) => setName(e.target.value)}
             value={currentUser.fullname}
           />
           <TextField

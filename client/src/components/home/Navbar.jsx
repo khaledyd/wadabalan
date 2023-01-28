@@ -8,12 +8,7 @@ import { logout } from "../../Redux/userSlice";
 import { useDispatch } from "react-redux";
 import { useNaviagte, useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
-import {
-  Button,
-
-  ListItem,
-  Typography,
-} from "@mui/material";
+import { Button, ListItem, Typography } from "@mui/material";
 import { border, Stack } from "@mui/system";
 import { ButtonUnstyled } from "@mui/base";
 
@@ -29,7 +24,7 @@ const NavBarItems = styled(Box)(({ theme }) => ({
 }));
 
 const Navbar = () => {
-const navigate = useNavigate()
+  const navigate = useNavigate();
   const { currentUser } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
@@ -38,7 +33,6 @@ const navigate = useNavigate()
   };
 
   return (
-    
     <Box
       sx={{
         backgroundImage: `url("https://images.pexels.com/photos/2449600/pexels-photo-2449600.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2")`,
@@ -83,15 +77,22 @@ const navigate = useNavigate()
                 display: { sm: "inline", xs: "inline", md: "flex" },
               }}
             >
-     
-              <Typography variant="h6">Organize Event</Typography>
-             
+              <Typography variant="h6"  onClick={()=>navigate("/Orgnaize")} sx={{
+                cursor: "pointer"
+              }}>Organize Event</Typography>
+
               {currentUser ? (
-                <Typography variant="h6">{currentUser.fullname}</Typography>
+                ""
               ) : (
-                <Typography variant="h6" onClick = {()=>navigate("/login")} sx={{
-                  cursor : "pointer",
-                }} >Log in</Typography>
+                <Typography
+                  variant="h6"
+                  onClick={() => navigate("/login")}
+                  sx={{
+                    cursor: "pointer",
+                  }}
+                >
+                  Log in
+                </Typography>
               )}
             </Box>
 
@@ -108,19 +109,16 @@ const navigate = useNavigate()
 
               <Button
                 variant="contained"
-
                 sx={{
                   color: "primary",
                   bgcolor: "#F675A8",
-                 
                 }}
+                onClick = {()=>navigate("/signup")}
               >
                 {currentUser ? "" : "get started"}
               </Button>
             </Box>
-            <Box>
-       
-            </Box>
+            <Box></Box>
           </Box>
         </Box>
         <ListItem
@@ -144,7 +142,6 @@ const navigate = useNavigate()
             The next events are here !
           </Typography>
         </ListItem>
-      
 
         <Box
           display={"flex"}
@@ -156,9 +153,7 @@ const navigate = useNavigate()
           }}
         >
           {" "}
-          <Typography variant="h6" sx={{ color: "#fff" }}>
-         
-          </Typography>
+          <Typography variant="h6" sx={{ color: "#fff" }}></Typography>
         </Box>
       </Stack>
     </Box>

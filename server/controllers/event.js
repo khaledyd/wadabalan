@@ -102,6 +102,7 @@ export const userAttend = async (req, res) => {
       if (sposts === 0) {
         res.status(401).json("sposts are filled");
       } else {
+
         const updatetheattendees = await Event.findByIdAndUpdate(
           req.params.id,
           {
@@ -125,7 +126,8 @@ export const userAttend = async (req, res) => {
           },
           { new: true }
         );
-        console.log(updatedspots);
+      
+        
         res.status(200).json(updatetheattendees);
       }
     }

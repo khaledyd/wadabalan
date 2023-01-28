@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import { IconButton, TextField, Theme } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import MenuIcon from "@mui/icons-material/Menu";
+import { useSelector } from "react-redux";
 import {
   Button,
   ImageList,
@@ -26,10 +27,11 @@ const NavBarItems = styled(Box)(({ theme }) => ({
 }));
 
 const Navbar = () => {
+  const { currentUser } = useSelector((state) => state.user);
   return (
     <Box
       sx={{
-       backgroundColor:"#554994",
+        backgroundColor: "#554994",
         width: { xs: "120%", sm: "100%" },
         backgroundSize: "cover",
       }}
@@ -71,25 +73,28 @@ const Navbar = () => {
                 display: { sm: "inline", xs: "inline", md: "flex" },
               }}
             >
-              <Typography variant="h6">Find Event</Typography>
               <Typography variant="h6">Organize Event</Typography>
-              <Typography variant="h6">About</Typography>
-              <Typography variant="h6">Log in</Typography>
+              {currentUser ? (
+                <Typography variant="h6">{currentUser.fullname}</Typography>
+              ) : (
+                ""
+              )}
             </Box>
 
             <Box>
-              <Button
-                variant="contained"
-                sx={{
-                  color: "primary",
-                  bgcolor: "#F675A8",
-                }}
-              >
-                Get Started
-              </Button>
-            </Box>
-            <Box>
-              <MenuIcon sx={{ color: "#fff" }} />
+              {currentUser ? (
+                ""
+              ) : (
+                <Button
+                  variant="contained"
+                  sx={{
+                    color: "primary",
+                    bgcolor: "#F675A8",
+                  }}
+                >
+                  Get Started
+                </Button>
+              )}
             </Box>
           </Box>
         </Box>

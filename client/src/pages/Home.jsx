@@ -9,7 +9,7 @@ import Popular from "../components/home/Popular";
 import Footer from "../components/home/Footer";
 import { useState, useEffect } from "react";
 import axios from "axios";
-
+import {axiosInstance} from "../config"
 
 const Vstrong = styled.strong`
   color: #f35588;
@@ -20,22 +20,19 @@ const Step = styled.h1`
 `;
 
 
-
 const Home = () => {
-
-
-
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
     const fetchEvents = async () => {
-      const res = await axios.get("/events");
+      const res = await axiosInstance.get("/events", {
+        withCredentials: true,
+      });
       setEvents(res.data);
-      console.log(res.data);
+
     };
     fetchEvents();
   }, []);
-
 
   return (
     <div>
@@ -65,16 +62,6 @@ const Home = () => {
         With the <Vstrong> simple </Vstrong> Steps you can attend event{" "}
       </Step>
       <Steps />
-      <Step style={{ color: "#F675A8" }}>Popular Organizers</Step>
-
-      <Box
-        gap={4}
-        pl={"30px"}
-        sx={{ width: { xs: "100%", sm: "100%", md: "100%" }, display: "flex" }}
-      >
-        <Popular style={{}} />
-        <Popular />
-      </Box>
       <Footer />
     </div>
   );

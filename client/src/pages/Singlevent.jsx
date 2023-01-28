@@ -7,20 +7,21 @@ import Button from "@mui/material/Button";
 import Footer from "../components/home/Footer";
 import { useLocation } from "react-router";
 import { useEffect, useState } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
+
+import { Link  , useNavigate} from "react-router-dom";
+import { axiosInstance } from "../config";
 
 const Singlevent = () => {
-  const PF = "http://localhost:5004/images/";
+  const navigate = useNavigate()
+  const PF = "https://wadabalan-api.cyclic.app/images/";
   const [events, setEvents] = useState({});
   const location = useLocation();
-  console.log(location);
   const path = location.pathname.split("/")[2];
 
   useEffect(() => {
     const getPost = async () => {
-      const res = await axios.get("/events/" + path);
-      console.log(res.data);
+      const res = await axiosInstance.get("/events/" + path);
+  
       setEvents(res.data);
     };
     getPost();
@@ -81,11 +82,11 @@ const Singlevent = () => {
         display={"flex"}
         sx={{ width: "60%" }}
       >
-        <Link to={`/${events._id}`}>
-          <Button variant="contained" sx={{ backgroundColor: "#F675A8" }}>
+
+          <Button variant="contained" sx={{ backgroundColor: "#F675A8" }} onClick = {()=>navigate(`/${events._id}`)}>
             Attend
           </Button>
-        </Link>
+     
         <Box sx={{ marginLeft: "50px" }}>{`${events.spots} spots lef`}</Box>
       </Box>
       <Footer />

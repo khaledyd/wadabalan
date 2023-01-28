@@ -14,11 +14,11 @@ const asttendSchema = new mongoose.Schema({
 });
 const EventSchema = new mongoose.Schema(
   {
-    eventImg:{
-      type: String
+    eventImg: {
+      type: String,
     },
-    userfullname:{
-      type: String
+    userfullname: {
+      type: String,
     },
     title: {
       type: String,
@@ -42,20 +42,16 @@ const EventSchema = new mongoose.Schema(
     date: {
       type: String,
     },
-  
+    userId: {
+      type: String,
+    },
+
     attendees: [asttendSchema],
-   
   },
   { timestamps: true }
 );
 
 export default mongoose.model("Event", EventSchema);
-
-
-
-
-
-
 
 /*"title":"hiejdjd",
 	"details":"hahhdhdheaha",

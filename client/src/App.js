@@ -37,7 +37,6 @@ function App() {
           <Route exact path="/" element={<Home />} />
           <Route exact path="/Login" element={<Login />} />
           <Route exact path="/Signup" element={<Signup />} />
-          <Route exact path="/Upcomming" element={<Upcomming />} />
           <Route exact path="card/:eventId" element={<Singlevent />} />
           <Route exact path="/:eventId" element={<Attend />} />
           <Route
@@ -45,16 +44,8 @@ function App() {
             path="/Orgnaize"
             element={currentUser ? <Orgnaize /> : <Login />}
           />
-          <Route
-            exact
-            path="/Userhomepage"
-            element={currentUser ? <Userhomepage /> : <Login />}
-          />
-          <Route
-            exact
-            path="/Settings"
-            element={currentUser ? <Settings /> : <Login />}
-          />
+        
+       
     
         </Routes>
       </Router>

@@ -5,11 +5,10 @@ import { Button, Typography } from "@mui/material";
 import { padding } from "@mui/system";
 import Mininav from "../components/home/Mininav";
 import { useState } from "react";
-import axios from "axios";
 import { loginStart ,loginSuccess, loginFailure  } from "../Redux/userSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
+import {axiosInstance} from "../config"
 export default function FormPropsTextFields() {
   const dispatch = useDispatch()
 
@@ -22,13 +21,13 @@ export default function FormPropsTextFields() {
     e.preventDefault();
     dispatch(loginStart());
     try{
-      const res = await axios.post("/auth/signin" , {
+      const res = await axiosInstance.post("/auth/signin" , {
         email,
         password
       })
       dispatch(loginSuccess(res.data))
       navigate("/");
-      console.log(res.data)
+
 
 
 
@@ -75,8 +74,8 @@ export default function FormPropsTextFields() {
             />
           </Box>
           <Button onClick={handlesubmit} type="submit" mt={3} sx={{ marginTop: "20px", backgroundColor:"#F675A8" ,color:"#fff" , padding:"5px 30px"}}>Log in</Button>
-          <Typography variant="h6" sx={{fontSize:"15px" , marginTop:"10px"}}>Sign  Uo</Typography>
-          <Typography variant="h6"sx={{fontSize:"10px"}}>Forget Password</Typography>
+          <Typography variant="h6" sx={{fontSize:"20px" , marginTop:"10px" , cursor :"pointer"}} onClick ={()=>navigate("/signup")} >Sign  Up</Typography>
+
         </Box>
       </Box>
     </Box>

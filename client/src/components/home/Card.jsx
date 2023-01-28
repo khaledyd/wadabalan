@@ -10,7 +10,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function MediaCard({ events }) {
-  const PF = "http://localhost:5004/images/";
+  const PF = "https://wadabalan-api.cyclic.app/images/";
   return (
     <Box
       sx={{
@@ -48,7 +48,7 @@ export default function MediaCard({ events }) {
             {events.eventtype}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {`${events.spots} Attendees`}
+            {`${events.attendees.length} Attendees / ${events.spots}Left`}
           </Typography>
           <Typography variant="body1" sx={{ color: "#F675A8" }}>
             {events.userfullname}

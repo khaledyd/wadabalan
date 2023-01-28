@@ -13,33 +13,34 @@ import { useNavigate } from "react-router-dom";
 import Ticket from "./Ticket";
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
-
+import { axiosInstance } from "../config";
 export default function Attend() {
   const printRef = useRef();
   const navigate = useNavigate();
   const data = [{ name: "", email: "", gender: "" }];
   const location = useLocation();
-  console.log(location);
+
   const path = location.pathname.split("/")[1];
-  console.log(path);
+
 
   const { currentEvent } = useSelector((state) => state.event);
-  console.log(currentEvent);
+
   const [attendees, setAttendees] = useState([
     {
       name: "",
       email: "",
       gender: "",
-      objectId: "_id",
     },
   ]);
 
   const [ticket, setTicket] = useState(false);
   const [ticketdata, setTicketData] = useState([]);
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [gender, setGender] = useState([""]);
 
   const array = [ticketdata];
-  console.log(array[0].details);
+
   ///onchange funtion
   const handleChange = (e) => {
     setAttendees((prev) => {
@@ -49,32 +50,33 @@ export default function Attend() {
 
   useEffect(() => {
     const getPost = async () => {
-      const res = await axios.get("/events/" + path);
-      //console.log(res.data);
+      const res = await axiosInstance.get("/events/" + path);
+  
       setTicketData(res.data);
     };
 
     getPost();
   }, [path]);
-  //console.log(ticketdata);
+
   //submit funcion
 
   const handleSubmit = async (e) => {
+    const attendees = {
+      email: email,
+      gender: gender,
+      name: name,
+    };
     e.preventDefault();
 
     try {
-      const res = await axios.put("/events/" + path, {
-        attendees,
-        data,
-      });
-      const ress = await axios.post("/auth/sendotp/", { email });
-      console.log(res.data.attendees);
-      console.log(ress.data);
+      const res = await axiosInstance.put("/events/userAttend/" + path, attendees);
+      const ress = await axiosInstance.post("/auth/sendotp/", { email });
+    
       setTicket(true);
       ///res.data && window.location.replace("/EventAttendees");
       //window.location.replace("/post/" + res.data._id);
     } catch (err) {
-      console.log(err);
+
     }
   };
   const id = nanoid();
@@ -94,7 +96,7 @@ export default function Attend() {
     pdf.save("print.pdf");
   };
   return (
-    <div >
+    <div>
       {ticket ? (
         <>
           <Box>
@@ -119,7 +121,7 @@ export default function Attend() {
                     marginLeft: "3%",
                   }}
                 >
-                  Ordered By : {attendees.name}
+                  Ordered By : {name}
                 </Typography>
                 <Typography
                   variant="h6"
@@ -141,7 +143,13 @@ export default function Attend() {
                 Powered By WADABALAN
               </Typography>
             </Box>
-            <Button onClick={handleDownloadPdf}>Dowanload</Button>
+            <Button onClick={handleDownloadPdf} sx={{
+              marginLeft: "40px",
+              width: "max-content",
+              backgroundColor:"#F675A8",
+              color: "white",
+              marginTop:"20px"
+            }}>Dowanload</Button>
           </Box>
         </>
       ) : (
@@ -174,22 +182,10 @@ export default function Attend() {
               variant="filled"
               sx={{ marginTop: "10px" }}
               name="name"
-              onChange={handleChange}
+              onChange={(e) => setName(e.target.value)}
               //onChange={(e) => setname(e.target.value)}
             />
 
-            <TextField
-              mt={10}
-              id="filled-password-input"
-              label="Email"
-              type="email"
-              autoComplete="current-password"
-              variant="filled"
-              sx={{ marginTop: "10px" }}
-              name="email"
-              onChange={handleChange}
-              //onChange={(e) => setEmail(e.target.value)}
-            />
             <TextField
               mt={10}
               id="filled-password-input"
@@ -211,7 +207,7 @@ export default function Attend() {
               label="Event Type"
               sx={{ marginTop: "10px" }}
               name="gender"
-              onChange={handleChange}
+              onChange={(e) => setGender(e.target.value)}
             >
               <MenuItem value={"male"}>Male</MenuItem>
               <MenuItem value={"Female"}>Femaile</MenuItem>

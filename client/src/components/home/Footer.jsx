@@ -15,8 +15,12 @@ const Footer = () => {
       sx={{
         display: "flex",
         flexDirection: "column",
-        width: "100%",
+        width:{
+          sx: "100vw",
+        },
         height: "max-height",
+        backgroundColor:"red",
+
       }}
     >
       <Box pl={2}
@@ -27,6 +31,7 @@ const Footer = () => {
           backgroundColor: "#554994",
           height: "300px",
           color: "#Fff",
+          width:"100vw"
         }}
       >
         <Box pl={2} pt={2}>
