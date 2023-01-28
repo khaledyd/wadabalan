@@ -1,4 +1,4 @@
-# nwadabalan
+# wadabalan
 Wadabalan is a full-stack event management application that allows users to create and attend events. 
 This application is built using Node.js, React, Express, MongoDB, and Material-UI.
 
